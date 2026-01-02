@@ -1,0 +1,14 @@
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import { DashboardSidebar } from '@/components/dashboard/DashboardSidebar';
+
+export default function DashboardLayout() {
+  return (
+    <div className="min-h-screen bg-background flex">
+      <DashboardSidebar />
+      <main className="flex-1 overflow-auto">
+        <Outlet />
+      </main>
+    </div>
+  );
+}
