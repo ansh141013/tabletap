@@ -1,7 +1,7 @@
 import React from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Smartphone, Zap, QrCode } from 'lucide-react';
+import { CheckCircle2, QrCode, Zap, Smartphone } from 'lucide-react';
 
 export default function AuthLayout() {
     return (
@@ -17,63 +17,49 @@ export default function AuthLayout() {
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="relative z-10 max-w-xl text-center space-y-8"
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="relative z-10 max-w-xl"
                 >
-                    <div className="space-y-4">
-                        <div className="flex justify-center">
-                            <div className="w-20 h-20 bg-primary rounded-3xl flex items-center justify-center shadow-2xl shadow-primary/20 transform -rotate-6">
-                                <span className="text-4xl">🍽️</span>
-                            </div>
+                    <div className="mb-12">
+                        <div className="flex items-center gap-3 mb-6">
+                            <span className="text-5xl">🍽️</span>
+                            {/* Ideally use actual SVG Logo if available, fallback to emoji for now as per previous file */}
                         </div>
-                        <h1 className="text-6xl font-black tracking-tight text-foreground">
-                            TableTap
+                        <h1 className="text-5xl font-extrabold tracking-tight text-foreground mb-4">
+                            Order smarter. <br />
+                            <span className="text-primary">Dine faster.</span>
                         </h1>
-                        <p className="text-2xl font-medium text-muted-foreground italic">
-                            “Order smarter. Dine faster.”
+                        <p className="text-xl text-muted-foreground leading-relaxed">
+                            Experience the future of dining with TableTap.
+                            Seamless ordering, instant checkout, and no app downloads required.
                         </p>
                     </div>
 
-                    <div className="grid gap-4 pt-8">
-                        <BenefitItem
-                            icon={QrCode}
-                            title="Scan QR"
-                            description="Point your camera at the table code"
-                        />
-                        <BenefitItem
-                            icon={Zap}
-                            title="Order instantly"
-                            description="No waiting for menus or servers"
-                        />
-                        <BenefitItem
-                            icon={Smartphone}
-                            title="No app download"
-                            description="Runs right in your mobile browser"
-                        />
+                    <div className="space-y-6">
+                        <BenefitItem icon={QrCode} title="Scan QR Code" description="Simply scan the code at your table." />
+                        <BenefitItem icon={Zap} title="Order Instantly" description="Browse the menu and order in seconds." />
+                        <BenefitItem icon={Smartphone} title="No App Download" description="Everything works directly in your browser." />
                     </div>
                 </motion.div>
             </div>
 
             {/* Right Side: Auth Form (40% Desktop) */}
             <div className="w-full lg:w-[40%] flex flex-col justify-center items-center p-6 lg:p-12 overflow-y-auto bg-background">
-                {/* Mobile Header (Hidden on Desktop) */}
-                <div className="lg:hidden mb-8 text-center">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-bold mb-4">
-                        <span>🍽️</span> TableTap
+                <div className="w-full max-w-[420px] space-y-6">
+                    {/* Mobile Header (Logo visible only on mobile) */}
+                    <div className="lg:hidden text-center mb-8">
+                        <span className="text-4xl">🍽️</span>
+                        <h2 className="text-2xl font-bold mt-2">TableTap</h2>
                     </div>
-                    <h2 className="text-2xl font-bold">Welcome back</h2>
-                </div>
 
-                <div className="w-full max-w-[420px]">
                     <Outlet />
                 </div>
 
-                {/* Footer links for mobile or overall */}
-                <footer className="mt-8 text-center text-sm text-muted-foreground">
-                    <p>&copy; {new Date().getFullYear()} TableTap. Dining Reimagined.</p>
+                <footer className="mt-8 text-center text-xs text-muted-foreground lg:hidden">
+                    &copy; 2025 TableTap. All rights reserved.
                 </footer>
             </div>
-        </div >
+        </div>
     );
 }
 
@@ -86,7 +72,7 @@ function BenefitItem({ icon: Icon, title, description }: { icon: any, title: str
             <div className="p-2 rounded-lg bg-primary/10 text-primary">
                 <Icon className="h-6 w-6" />
             </div>
-            <div className="text-left">
+            <div>
                 <h3 className="font-semibold text-lg">{title}</h3>
                 <p className="text-sm text-muted-foreground">{description}</p>
             </div>
