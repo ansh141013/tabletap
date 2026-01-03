@@ -13,6 +13,7 @@ import Welcome from "./pages/auth/Welcome";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import ForgotPassword from "./pages/auth/ForgotPassword";
+import AuthCallback from "./pages/auth/AuthCallback";
 import OnboardingWizard from "./pages/onboarding/OnboardingWizard";
 
 // Customer Pages
@@ -54,7 +55,7 @@ const App = () => (
                     <Route path="login" element={<Login />} />
                     <Route path="register" element={<Register />} />
                     <Route path="forgot-password" element={<ForgotPassword />} />
-                    {/* <Route path="reset-password" element={<ResetPassword />} /> */}
+                    <Route path="callback" element={<AuthCallback />} />
                   </Route>
 
                   {/* Onboarding */}
