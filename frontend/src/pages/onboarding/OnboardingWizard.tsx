@@ -151,7 +151,7 @@ export default function OnboardingWizard() {
                             <div className="relative">
                                 <Input
                                     value={username}
-                                    onChange={(e) => setUsername(e.target.value.toLowerCase())}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value.toLowerCase())}
                                     placeholder="cool_diner"
                                     className={cn(
                                         usernameAvailable === true && "border-success focus-visible:ring-success",
@@ -245,7 +245,7 @@ export default function OnboardingWizard() {
                                 { key: 'isVegan', label: 'Vegan', icon: '🌱' },
                                 { key: 'spicyLover', label: 'Spicy Lover', icon: '🌶️' },
                                 { key: 'sweetTooth', label: 'Sweet Tooth', icon: '🍰' },
-                            ].map((pref: any) => (
+                            ].map((pref) => (
                                 <div
                                     key={pref.key}
                                     onClick={() => setPreferences(p => ({ ...p, [pref.key]: !p[pref.key as keyof typeof preferences] }))}
@@ -281,7 +281,7 @@ export default function OnboardingWizard() {
                             <Input
                                 placeholder="e.g. No onions, Allergies to nuts..."
                                 value={about}
-                                onChange={e => setAbout(e.target.value)}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAbout(e.target.value)}
                             />
                         </div>
 
@@ -352,9 +352,11 @@ export default function OnboardingWizard() {
             {/* Progress Bar (Optional) */}
             {currentStep > 0 && currentStep < 5 && (
                 <div className="fixed top-0 left-0 right-0 h-1 bg-muted">
-                    <div
-                        className="h-full bg-primary transition-all duration-500 ease-out"
-                        style={{ width: `${(currentStep / 5) * 100}%` }}
+                    <motion.div
+                        className="h-full bg-primary"
+                        initial={{ width: 0 }}
+                        animate={{ width: `${(currentStep / 5) * 100}%` }}
+                        transition={{ duration: 0.5, ease: "easeOut" }}
                     />
                 </div>
             )}

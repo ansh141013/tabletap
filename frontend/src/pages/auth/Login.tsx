@@ -108,7 +108,7 @@ export default function Login() {
                                         placeholder="name@example.com"
                                         required={loginMethod === 'email'}
                                         value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                                         className="h-11"
                                     />
                                 </div>
@@ -119,7 +119,7 @@ export default function Login() {
                                         placeholder="••••••••"
                                         required={loginMethod === 'email'}
                                         value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                                         className="h-11"
                                     />
                                 </div>
@@ -143,7 +143,7 @@ export default function Login() {
                                         placeholder="+1 234 567 8900"
                                         required={loginMethod === 'phone'}
                                         value={phone}
-                                        onChange={(e) => setPhone(e.target.value)}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
                                         className="h-11"
                                     />
                                     <p className="text-xs text-muted-foreground flex items-center gap-1">

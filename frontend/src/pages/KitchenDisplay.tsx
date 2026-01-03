@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Clock, Check, ArrowLeft, Volume2, VolumeX, Bell } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
+import { Order, CartItem, AddOn } from '@/types/menu';
 import { useNavigate } from 'react-router-dom';
 import { useOrderNotifications } from '@/hooks/useOrderNotifications';
 import { Toaster } from '@/components/ui/toaster';
@@ -14,7 +15,7 @@ export default function KitchenDisplay() {
   const { soundEnabled, toggleSound, testSound } = useOrderNotifications(orders);
 
   // Filter to show only orders that need kitchen attention
-  const kitchenOrders = orders.filter(o =>
+  const kitchenOrders = orders.filter((o: Order) =>
     o.status === 'accepted' || o.status === 'preparing'
   );
 
@@ -98,7 +99,7 @@ export default function KitchenDisplay() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {kitchenOrders.map(order => (
+            {kitchenOrders.map((order: Order) => (
               <div
                 key={order.id}
                 className="kitchen-card bg-card text-card-foreground"
@@ -119,7 +120,7 @@ export default function KitchenDisplay() {
 
                 {/* Order Items */}
                 <div className="space-y-3 mb-4">
-                  {order.items.map((item, index) => (
+                  {order.items.map((item: CartItem, index: number) => (
                     <div key={index} className="space-y-1">
                       <div className="flex items-start gap-3">
                         <span className="text-xl font-bold text-accent min-w-[2rem]">
@@ -129,7 +130,7 @@ export default function KitchenDisplay() {
                           <p className="font-semibold text-lg">{item.menuItem.name}</p>
                           {item.selectedAddOns.length > 0 && (
                             <p className="text-sm text-muted-foreground">
-                              + {item.selectedAddOns.map(a => a.name).join(', ')}
+                              + {item.selectedAddOns.map((a: AddOn) => a.name).join(', ')}
                             </p>
                           )}
                         </div>
