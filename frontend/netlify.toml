@@ -2,6 +2,11 @@
   command = "npm run build"
   publish = "dist"
 
+# Environment variables that are safe to expose (public Supabase keys)
+[build.environment]
+  # These VITE_ variables are intentionally public and embedded in the client bundle
+  SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_URL,VITE_SUPABASE_ANON_KEY,VITE_RESTAURANT_ID"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
@@ -9,3 +14,12 @@
 
 [functions]
   directory = "../backend/netlify-functions"
+
+# Headers for security
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
